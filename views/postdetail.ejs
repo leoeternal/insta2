@@ -1,0 +1,46 @@
+<%- include('partials/header.ejs') -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <br><br>
+            <h4><img id="edit-post-user-image" src="<%= postDetail.user.image%> " >
+            <a id="explore-profile-name" href="/show/profile/<%= postDetail.user.id %>"><%= postDetail.user.username %></a>
+            </h4>
+            <img class="edit-post-image" src="<%= postDetail.postimage %>"><br><br>
+            <%= postDetail.caption %><br>
+            <p><b><%= postDetail.likecount %> likes</b>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <span id="edit-post-user-username">
+                <% if(JSON.stringify(postDetail.user.id)==JSON.stringify(currentUser._id)){ %>
+                    <a href="/post/delete/<%= postDetail._id %>"><button class="btn btn-danger">Delete</button></a>
+                &nbsp
+                <a href="/post/edit/<%= postDetail._id %>"><button class="btn btn-success">Edit</button></a>
+                <% } %>
+            </span>
+            </p>
+            <% var status=true;
+               var index;
+            %>
+            <% for(var k=0;k<postDetail.likeUsers.length;k++){ 
+                if(postDetail.likeUsers[k].username == currentUser.username){ 
+                        index= k  
+                        status=false 
+                        break 
+                    }else{ 
+                        status=true 
+                    }  
+                }
+                if(status == true ){ %>
+                    <a href="/post/like/<%= currentUser._id %>/<%= postDetail.user.id %>/<%= postDetail._id %>/postdetail"><button class="btn btn-primary">Like</button></a>
+                    <% }else{ %>
+                    <a href="/post/dislike/<%= currentUser._id %>/<%= postDetail.user.id %>/<%= postDetail._id %>/<%= index %>/postdetail"><button class="btn btn-primary">Dislike</button></a>
+                    <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') -%>

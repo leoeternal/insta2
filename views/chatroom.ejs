@@ -1,0 +1,60 @@
+<%- include('partials/header.ejs') -%>
+<div id="container">
+    <div id="wrapper">
+        <div id="chat-box">
+            
+            <div id="profile-user-info">
+                <h5><img src="<%= findProfileUser.image %>">&nbsp<a id="explore-profile-name" href="/show/profile/<%= findProfileUser._id %>"><%= findProfileUser.username %></a></h5>
+            </div><hr>
+            <div id="chat-text-area">
+                <div id="chat-text-area-wrapper">
+                   
+                 <% if(chatroomCreatedSender.senderinfo.messages.length>chatroomCreatedSender.recieverinfo.messages.length){ %>
+                    <% var ln = chatroomCreatedSender.senderinfo.messages.length%>
+               <%  } else { %>
+               <% var ln = chatroomCreatedSender.recieverinfo.messages.length%>
+               <% } %>
+               
+               
+              <% if(chatroomCreatedSender.status==1){
+                          
+                        for(var i=0;i<ln;i++)
+                       { 
+                           
+                         if(chatroomCreatedProfile.recieverinfo.messages[i]){  %>
+                           <b><%= chatroomCreatedProfile.recieverinfo.username  %></b> <%= chatroomCreatedProfile.recieverinfo.messages[i]; %><br><hr>
+                           <% } 
+                           if(chatroomCreatedSender.recieverinfo.messages[i]){ %>
+                         
+                          <b><%= chatroomCreatedSender.recieverinfo.username  %></b> <%= chatroomCreatedSender.recieverinfo.messages[i]; %><br><hr>
+                          <%  } }
+                        }else{
+                        for(var i=0;i<ln;i++)
+                       { 
+                         
+                           if(chatroomCreatedSender.recieverinfo.messages[i]){ %>
+                         <b><%= chatroomCreatedSender.recieverinfo.username  %></b> <%= chatroomCreatedSender.recieverinfo.messages[i]; %><br><hr>
+                          <%  }
+                          if(chatroomCreatedProfile.recieverinfo.messages[i]){  %>
+                           <b><%= chatroomCreatedProfile.recieverinfo.username  %></b> <%= chatroomCreatedProfile.recieverinfo.messages[i]; %><br><hr>
+                           <% } 
+                           
+                       }
+                        }%>
+               </div>
+            </div>
+            <div id="write-message-wrapper">
+                <form action="/send/message/from/<%= findLoggedInUser._id %>/to/<%= findProfileUser._id %>/from/<%= chatroomCreatedSender._id %>/to/<%= chatroomCreatedProfile._id %>" method="POST">
+                <div id="write-message">
+                    <textarea cols="100" name="message" placeholder="Enter message" rows="2"></textarea>
+                </div>
+                <div id="button-send">
+                    <button class="btn btn-danger">Send</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') -%>

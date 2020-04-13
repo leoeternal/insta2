@@ -1,0 +1,156 @@
+body{
+    background-image: linear-gradient(to right,#cc2b5e,#753a88); 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.input-field-size{
+    width: 300px;
+}
+
+#login-form{
+    margin-left: 150px;
+    margin-top: 150px;
+}
+
+#portfolio-photo{
+    height:500px;
+    margin-left: 100px;
+    margin-top: 60px;
+}
+.welcome-back-text{
+    margin-left: 100px;
+}
+
+#register-page{
+    text-align:center;
+}
+.input-field-register{
+    margin-left: 400px;
+    width: 300px;
+}
+.dropdown-shift-right{
+    margin-left: 980px;
+}
+#profile-photo{
+    width: 200px;
+    height:200px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+
+.edit-image-members{
+    width: 100px;
+    height:100px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 2px grey;
+    margin: 15px;
+}
+
+#explore-follow-btn{
+    margin-left: 100px
+}
+
+#explore-profile-name{
+    color: black;
+}
+
+#edit-post-user-image{
+     width: 70px;
+    height:70px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+#post-container{
+    margin-left: 25%;
+}
+
+.edit-post-image{
+    width: 500px;
+    height:500px;
+    object-fit: cover;
+    box-shadow: 2px 2px 2px 2px grey;
+ 
+}
+
+#edit-post-user-username{
+    margin-left: 10px
+} 
+
+.wrapper-post-box{
+    width: 30%;
+    height:35%;
+    float: left;
+    margin: 15px;
+}
+
+#profile-post-image-edit{
+    width: 98%;
+    height:98%;
+}
+
+#caption-update{
+    width: 600px;
+    height: 100px
+}
+
+#wrapper{
+    width: 99%;
+    height:600px;
+}
+#chat-box{
+    width: 70%;
+    height:550px;
+    margin-left: 200px;
+    margin-top: 25px;
+    background-color:white;
+}
+#profile-user-info{
+    width: 99%;
+    height:60px;
+    padding: 5px;
+}
+#profile-user-info img{
+    width: 60px;
+    height:60px;
+    border-radius: 50%;
+}
+#chat-text-area{
+    width: 99%;
+    height:390px;
+    margin-left: 2px;
+    overflow: auto;
+}
+
+#write-message-wrapper::after{content: " "; display: block ; clear: both; }
+
+#write-message{
+    width: 90%;
+    height:50px;
+    transform: translateY(-6px);
+    margin-left: 5px;
+    float: left;
+}
+#button-send{
+    width: 8%;
+    height:50px;
+    float: right;
+    margin: 2.5px;
+}
+
+
+
+#chat-text-area-wrapper::after{content: " "; display: block ; clear: both; }
+
+#left-chat{
+    float: left;
+}
+
+#right-chat{
+    float: right;
+}

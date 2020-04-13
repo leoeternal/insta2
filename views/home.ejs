@@ -1,0 +1,59 @@
+<%- include('partials/header') -%>
+        <div class="container">
+            <div class="wrapper-home">
+                <br>
+               
+                <center><h1>Add a post <i onclick="showimageform()" class="far fa-plus-square"></i></h1></center>
+                <form id="uploadForm" enctype="multipart/form-data" action="/profile/<%= findUser._id %>/addpost" method="post">
+                   <center><input type="file" onclick="showsubmitbutton()" name="userPhoto" /></center>
+                   <center><textarea name="caption" rows="3" cols="50" placeholder="Enter a caption"></textarea></center>
+                   <center><input type="submit" id="submitbutton" value="Upload Image" name="submit"></center>
+                   <input type='text' id='random' name='random' hidden><br>
+                   </form>
+        <br>
+        <% for(var i=allpostfind.length-1;i>=0;i--)
+        { 
+            
+            var status=true; 
+            var index;
+            if(currentUser.followings.length==0){ %>
+                <h1>Start following people on INSTAGRAM2 to see their photos and videos.</h1>
+                <% break %>
+            <% }
+            else{
+                for(var j=0;j<currentUser.followings.length;j++){ %>
+                    <% if(JSON.stringify(allpostfind[i].user.id) == JSON.stringify(currentUser.followings[j]._id)){ %>
+                        <div id="post-container">
+                        <h4><img id="edit-post-user-image" src="<%= allpostfind[i].user.image%> " ><span id="edit-post-user-username"><a id="explore-profile-name" href="/show/profile/<%= allpostfind[i].user.id %>"><%= allpostfind[i].user.username %></a></span></h4><br>
+                        <img class="edit-post-image" src="<%= allpostfind[i].postimage %>"><br><br>
+                        <b><%= allpostfind[i].likecount %> </b>likes<br>
+                        <% for(var k=0;k<allpostfind[i].likeUsers.length;k++){ 
+                              if(allpostfind[i].likeUsers[k].username == currentUser.username){ 
+                                  index= k  
+                                  status=false 
+                                  break 
+                              }else{ 
+                                  status=true 
+                                }
+                              } 
+                        if(status == true ){ %>
+                            <a href="/post/like/<%= currentUser._id %>/<%= allpostfind[i].user.id %>/<%= allpostfind[i]._id %>/home"><button class="btn btn-primary">Like</button></a>
+                        <% }else{ %>
+                            <a href="/post/dislike/<%= currentUser._id %>/<%= allpostfind[i].user.id %>/<%= allpostfind[i]._id %>/<%= index %>/home"><button class="btn btn-primary">Dislike</button></a>
+                        <% } %>
+                        <br>
+                        <% if(JSON.stringify(currentUser._id) == JSON.stringify(allpostfind[i].user.id)){ %>
+                            <h2><a href="/post/delete/<%= allpostfind[i]._id %>"><button class="btn btn-danger">Delete</button></a> &nbsp <a href="/post/edit/<%= allpostfind[i]._id %>"><button class="btn btn-success">Edit</button></a></h2>
+                        <% } %>
+              
+                        <p><b><a id="explore-profile-name" href="/show/profile/<%= allpostfind[i].user.id %>"><%= allpostfind[i].user.username %></a></b>&nbsp&nbsp <%= allpostfind[i].caption %></p>
+                    </div>
+                 <hr>
+              <% }
+               }
+             }  
+           } %>
+        </div>
+        </div>
+   <%- include('partials/footer') -%>
+   

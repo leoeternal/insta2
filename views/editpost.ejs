@@ -1,0 +1,22 @@
+<%- include('partials/header.ejs') -%>
+
+<div class="container">
+    <br><br>
+    <div class="row">
+        <div class="col-lg-6">
+          <img class="edit-post-image" src="<%= findPost.postimage %>">  
+        </div>
+        <div class="col-lg-6">
+            <form action="/edit/post/update/<%= findPost._id %>" method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1"><b>Caption</b></label>
+                <input type="text" class="form-control input-field-size" value="<%= findPost.caption %>" id="caption-update" name="caption" aria-describedby="emailHelp">
+                
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') -%>

@@ -1,0 +1,89 @@
+<%- include('partials/header'); -%>
+
+<div class="container">
+    <br>
+    <br>
+    <div class="media">
+        <hr>
+    <img id="profile-photo" onclick="showimageform()" src="<%= findUser.image %>" class="mr-3" alt="...">
+  <div class="media-body">
+    <% var x=false %>
+    <h2 id="username" class="mt-0"><%= findUser.username%> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    
+       <% if(JSON.stringify(findUser._id) != JSON.stringify(currentUser._id)){  
+          if(currentUser.followings.length==0){ %>
+              <a href="/following/<%= findUser._id %>"><button id="explore-follow-btn" class="btn btn-primary">Follow</button></a></h2>
+          <% }else{ 
+           for(var j=0;j<currentUser.followings.length;j++){ 
+              if(findUser.username == currentUser.followings[j].username){ %>
+                   <% x=true %>
+                   <% break %>
+              <% } 
+               }
+               if(x==true){ %>
+                   <a href="/unfollowing/<%= j %>/<%= findUser._id %>"><button id="explore-follow-btn" class="btn btn-primary">Unfollow</button></a>
+                   &nbsp&nbsp<a href="/chat/<%= findUser._id %>/<%= currentUser._id %>"><button class="btn btn-success">Chat</button></a>
+                   </h2>
+                   <% x=false %>
+            <% }else{ %>
+                   <a href="/following/<%= findUser._id %>"><button id="explore-follow-btn" class="btn btn-primary">Follow</button></a></h2>
+            <% }
+             }  
+           }else{
+           %>
+           </h2>
+            <% } %>
+    <br>
+    <% if(findUser.bio != null){ %>
+    <%= findUser.bio %>
+    <% } else{ 
+           if(JSON.stringify(findUser._id) == JSON.stringify(currentUser._id)){ %>
+               <button id="showform" onclick="showform()" class="btn btn-primary">Add a bio</button>   
+           <% }else{ %>
+               <p>No bio yet</p>
+           <% }
+    } %>
+    <form action="/profile/<%= findUser._id %>/bio" method="POST" id="textarea">
+        <textarea name="bio" placeholder="Enter Bio ..." rows=3 cols=100 ></textarea><br>
+        <button class="btn btn-danger">Submit</button>
+    </form>
+  </div>
+  
+</div>
+<div class="row">
+    <div class="col-lg-6">
+<form id="uploadForm" enctype="multipart/form-data" action="/profile/<%= findUser._id %>/image" method="post">
+      <input type="file" onclick="showsubmitbutton()" name="userPhoto" /><br>
+      <input type="submit" id="submitbutton" value="Upload Image" name="submit">
+      <input type='text' id='random' name='random' hidden><br>
+    </form>
+    </div>
+    <div class="col-lg-6">
+        <% var counterpost=0; %>
+        <% var counterfollowing=0; %>
+        <% for(var i=allpostfind.length-1;i>=0;i--)
+          { 
+             if( JSON.stringify(findUser._id)==JSON.stringify(allpostfind[i].user.id) ){
+             %> 
+                  <% counterpost++ %>
+             <% }
+           } %>
+            <h3><%= counterpost %> posts &nbsp&nbsp&nbsp&nbsp&nbsp <%= findUser.followings.length %> following</h3>
+    </div>
+</div>    
+<hr>
+<div id="wrapper">
+       <% for(var i=allpostfind.length-1;i>=0;i--)
+          { 
+             if( JSON.stringify(findUser._id)==JSON.stringify(allpostfind[i].user.id) ){
+             %> 
+             <div class="wrapper-post-box">
+             <a href="/post/detail/<%= allpostfind[i]._id %>"><img id="profile-post-image-edit" src="<%= allpostfind[i].postimage %>"></a>
+             </div>
+             <% }
+           } %>
+</div>
+
+</div>
+
+<%- include('partials/footer'); -%>

@@ -1,0 +1,34 @@
+<%- include('partials/header.ejs') -%>
+
+<div class="container">
+    <br>
+    <% var x=false %>
+    <center><h1>Explore INSTAGRAM2</h1></center>
+    <hr>
+    <br>
+    <% for(var i=0;i<allusers.length;i++)
+    { %>
+       <h4><a id="explore-profile-name" href="/show/profile/<%= allusers[i]._id %>"><img class="edit-image-members" src="<%= allusers[i].image %>"><%= allusers[i].username %></a>
+       <% if(JSON.stringify(allusers[i]._id) != JSON.stringify(currentUser._id)){  
+          if(currentUser.followings.length==0){ %>
+              <a href="/following/<%= allusers[i]._id %>"><button id="explore-follow-btn" class="btn btn-primary">Follow</button></a></h4>
+          <% }else{ 
+           for(var j=0;j<currentUser.followings.length;j++){ 
+              if(allusers[i].username == currentUser.followings[j].username){ %>
+                   <% x=true %>
+                   <% break %>
+              <% } 
+               }
+               if(x==true){ %>
+                   <a href="/unfollowing/<%= j %>/<%= allusers[i]._id %>"><button id="explore-follow-btn" class="btn btn-primary">Unfollow</button></a></h4>
+                   <% x=false %>
+            <% }else{ %>
+                   <a href="/following/<%= allusers[i]._id %>"><button id="explore-follow-btn" class="btn btn-primary">Follow</button></a></h4>
+            <% }
+             }  
+           } 
+         } %>
+</div>
+
+
+<%- include('partials/footer.ejs') -%>
