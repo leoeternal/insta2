@@ -8,6 +8,8 @@ var multer=require("multer")
 var multerS3=require("multer-s3");
 var aws=require("aws-sdk");
 
+require("dotenv").config();
+
 var photoname;
 
 var transporter=require("./helper/email/email");
@@ -38,8 +40,8 @@ passport.deserializeUser(User.deserializeUser());
 mongoose.connect("mongodb+srv://nikhil123:nikhil123@portfolio-la7ms.mongodb.net/test?retryWrites=true&w=majority");
 
 aws.config.update({
-    secretAccessKey: 'HVQoFMXN/lHwPnAberU/oMDxguLIpSkl9LXScpmx',
-    accessKeyId: 'AKIAJHPOPJGTMK5ELJEA',
+    secretAccessKey: process.env.secretAccessKey,
+    accessKeyId: process.env.accessKeyId,
     region: 'us-east-2'
 });
 
